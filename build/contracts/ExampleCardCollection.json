@@ -1,0 +1,2643 @@
+{
+  "contractName": "ExampleCardCollection",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_index",
+          "type": "uint256"
+        },
+        {
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "name": "_text",
+          "type": "string"
+        },
+        {
+          "name": "_rarity",
+          "type": "int8"
+        },
+        {
+          "name": "_attack",
+          "type": "int8"
+        },
+        {
+          "name": "_defence",
+          "type": "int8"
+        }
+      ],
+      "name": "editCard",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "editCard",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "collection_name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_index",
+          "type": "uint256"
+        },
+        {
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "name": "_text",
+          "type": "string"
+        },
+        {
+          "name": "_rarity",
+          "type": "int8"
+        },
+        {
+          "name": "_attack",
+          "type": "int8"
+        },
+        {
+          "name": "_defence",
+          "type": "int8"
+        }
+      ],
+      "name": "addCard",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "addCard",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.18;\nimport \"./Ownable.sol\";\n\ncontract CardCollection is Ownable {\n    /* This contract defines the set of cards in the game */\n    string public collection_name;\n    uint public version;\n\n    function CardCollection(string _name, uint _version) public {\n        collection_name = _name;\n        version = _version;\n    }\n    function addCard(uint _index) public onlyOwner();\n    function editCard(uint _index) public onlyOwner();\n}\n\ncontract ExampleCardCollection is CardCollection {\n    /* \n    This struct should be interchangable. TODO: Work out how to set dynamically in constructor\n    */\n    struct Card {\n        string name;\n        string text;\n        int8 attack;\n        int8 defence;\n        int8 rarity;\n        uint lastModified;\n        uint created;\n    }\n    mapping(uint => Card) Cards;\n\n    function addCard(uint _index, string _name, string _text, int8 _rarity, int8 _attack, int8 _defence) public \n        onlyOwner() \n    {\n        Cards[_index].name = _name;\n        Cards[_index].text = _text;\n        Cards[_index].attack = _attack;\n        Cards[_index].defence = _defence;\n        Cards[_index].rarity = _rarity;\n        Cards[_index].created = block.timestamp;\n    }\n\n    function editCard(uint _index, string _name, string _text, int8 _rarity, int8 _attack, int8 _defence) public \n        onlyOwner() \n    {\n        // TODO: Build this more dynamically\n        Cards[_index].name = _name;\n        Cards[_index].text = _text;\n        Cards[_index].attack = _attack;\n        Cards[_index].defence = _defence;\n        Cards[_index].rarity = _rarity;\n        Cards[_index].lastModified = block.timestamp;\n    }\n}",
+  "sourcePath": "/Users/connormacdougall/Projects/ethereum-ccg-engine/contracts/CardCollection.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/connormacdougall/Projects/ethereum-ccg-engine/contracts/CardCollection.sol",
+      "exportedSymbols": {
+        "CardCollection": [
+          39
+        ],
+        "ExampleCardCollection": [
+          183
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 370,
+          "absolutePath": "/Users/connormacdougall/Projects/ethereum-ccg-engine/contracts/Ownable.sol",
+          "file": "./Ownable.sol",
+          "scope": 184,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 2,
+        "name": "ImportDirective",
+        "src": "25:23:0"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            369
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            39,
+            369
+          ],
+          "name": "CardCollection",
+          "scope": 184
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Ownable",
+                  "referencedDeclaration": 369,
+                  "type": "contract Ownable"
+                },
+                "id": 3,
+                "name": "UserDefinedTypeName",
+                "src": "77:7:0"
+              }
+            ],
+            "id": 4,
+            "name": "InheritanceSpecifier",
+            "src": "77:7:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "collection_name",
+              "scope": 39,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "string storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "string",
+                  "type": "string storage pointer"
+                },
+                "id": 5,
+                "name": "ElementaryTypeName",
+                "src": "152:6:0"
+              }
+            ],
+            "id": 6,
+            "name": "VariableDeclaration",
+            "src": "152:29:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "version",
+              "scope": 39,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 7,
+                "name": "ElementaryTypeName",
+                "src": "187:4:0"
+              }
+            ],
+            "id": 8,
+            "name": "VariableDeclaration",
+            "src": "187:19:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "CardCollection",
+              "payable": false,
+              "scope": 39,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_name",
+                      "scope": 24,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 9,
+                        "name": "ElementaryTypeName",
+                        "src": "237:6:0"
+                      }
+                    ],
+                    "id": 10,
+                    "name": "VariableDeclaration",
+                    "src": "237:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_version",
+                      "scope": 24,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 11,
+                        "name": "ElementaryTypeName",
+                        "src": "251:4:0"
+                      }
+                    ],
+                    "id": 12,
+                    "name": "VariableDeclaration",
+                    "src": "251:13:0"
+                  }
+                ],
+                "id": 13,
+                "name": "ParameterList",
+                "src": "236:29:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 14,
+                "name": "ParameterList",
+                "src": "273:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 6,
+                              "type": "string storage ref",
+                              "value": "collection_name"
+                            },
+                            "id": 15,
+                            "name": "Identifier",
+                            "src": "283:15:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 10,
+                              "type": "string memory",
+                              "value": "_name"
+                            },
+                            "id": 16,
+                            "name": "Identifier",
+                            "src": "301:5:0"
+                          }
+                        ],
+                        "id": 17,
+                        "name": "Assignment",
+                        "src": "283:23:0"
+                      }
+                    ],
+                    "id": 18,
+                    "name": "ExpressionStatement",
+                    "src": "283:23:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 8,
+                              "type": "uint256",
+                              "value": "version"
+                            },
+                            "id": 19,
+                            "name": "Identifier",
+                            "src": "316:7:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 12,
+                              "type": "uint256",
+                              "value": "_version"
+                            },
+                            "id": 20,
+                            "name": "Identifier",
+                            "src": "326:8:0"
+                          }
+                        ],
+                        "id": 21,
+                        "name": "Assignment",
+                        "src": "316:18:0"
+                      }
+                    ],
+                    "id": 22,
+                    "name": "ExpressionStatement",
+                    "src": "316:18:0"
+                  }
+                ],
+                "id": 23,
+                "name": "Block",
+                "src": "273:68:0"
+              }
+            ],
+            "id": 24,
+            "name": "FunctionDefinition",
+            "src": "213:128:0"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "constant": false,
+              "implemented": false,
+              "isConstructor": false,
+              "name": "addCard",
+              "payable": false,
+              "scope": 39,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_index",
+                      "scope": 31,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 25,
+                        "name": "ElementaryTypeName",
+                        "src": "363:4:0"
+                      }
+                    ],
+                    "id": 26,
+                    "name": "VariableDeclaration",
+                    "src": "363:11:0"
+                  }
+                ],
+                "id": 27,
+                "name": "ParameterList",
+                "src": "362:13:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 30,
+                "name": "ParameterList",
+                "src": "394:0:0"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 343,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 28,
+                    "name": "Identifier",
+                    "src": "383:9:0"
+                  }
+                ],
+                "id": 29,
+                "name": "ModifierInvocation",
+                "src": "383:11:0"
+              }
+            ],
+            "id": 31,
+            "name": "FunctionDefinition",
+            "src": "346:49:0"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "constant": false,
+              "implemented": false,
+              "isConstructor": false,
+              "name": "editCard",
+              "payable": false,
+              "scope": 39,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_index",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 32,
+                        "name": "ElementaryTypeName",
+                        "src": "418:4:0"
+                      }
+                    ],
+                    "id": 33,
+                    "name": "VariableDeclaration",
+                    "src": "418:11:0"
+                  }
+                ],
+                "id": 34,
+                "name": "ParameterList",
+                "src": "417:13:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 37,
+                "name": "ParameterList",
+                "src": "449:0:0"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 343,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 35,
+                    "name": "Identifier",
+                    "src": "438:9:0"
+                  }
+                ],
+                "id": 36,
+                "name": "ModifierInvocation",
+                "src": "438:11:0"
+              }
+            ],
+            "id": 38,
+            "name": "FunctionDefinition",
+            "src": "400:50:0"
+          }
+        ],
+        "id": 39,
+        "name": "ContractDefinition",
+        "src": "50:402:0"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            39,
+            369
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            183,
+            39,
+            369
+          ],
+          "name": "ExampleCardCollection",
+          "scope": 184
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "CardCollection",
+                  "referencedDeclaration": 39,
+                  "type": "contract CardCollection"
+                },
+                "id": 40,
+                "name": "UserDefinedTypeName",
+                "src": "488:14:0"
+              }
+            ],
+            "id": 41,
+            "name": "InheritanceSpecifier",
+            "src": "488:14:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "ExampleCardCollection.Card",
+              "name": "Card",
+              "scope": 183,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "name",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 42,
+                    "name": "ElementaryTypeName",
+                    "src": "641:6:0"
+                  }
+                ],
+                "id": 43,
+                "name": "VariableDeclaration",
+                "src": "641:11:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "text",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 44,
+                    "name": "ElementaryTypeName",
+                    "src": "662:6:0"
+                  }
+                ],
+                "id": 45,
+                "name": "VariableDeclaration",
+                "src": "662:11:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "attack",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "int8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "int8",
+                      "type": "int8"
+                    },
+                    "id": 46,
+                    "name": "ElementaryTypeName",
+                    "src": "683:4:0"
+                  }
+                ],
+                "id": 47,
+                "name": "VariableDeclaration",
+                "src": "683:11:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "defence",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "int8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "int8",
+                      "type": "int8"
+                    },
+                    "id": 48,
+                    "name": "ElementaryTypeName",
+                    "src": "704:4:0"
+                  }
+                ],
+                "id": 49,
+                "name": "VariableDeclaration",
+                "src": "704:12:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "rarity",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "int8",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "int8",
+                      "type": "int8"
+                    },
+                    "id": 50,
+                    "name": "ElementaryTypeName",
+                    "src": "726:4:0"
+                  }
+                ],
+                "id": 51,
+                "name": "VariableDeclaration",
+                "src": "726:11:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "lastModified",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 52,
+                    "name": "ElementaryTypeName",
+                    "src": "747:4:0"
+                  }
+                ],
+                "id": 53,
+                "name": "VariableDeclaration",
+                "src": "747:17:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "created",
+                  "scope": 56,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 54,
+                    "name": "ElementaryTypeName",
+                    "src": "774:4:0"
+                  }
+                ],
+                "id": 55,
+                "name": "VariableDeclaration",
+                "src": "774:12:0"
+              }
+            ],
+            "id": 56,
+            "name": "StructDefinition",
+            "src": "619:174:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "Cards",
+              "scope": 183,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 57,
+                    "name": "ElementaryTypeName",
+                    "src": "806:4:0"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "Card",
+                      "referencedDeclaration": 56,
+                      "type": "struct ExampleCardCollection.Card storage pointer"
+                    },
+                    "id": 58,
+                    "name": "UserDefinedTypeName",
+                    "src": "814:4:0"
+                  }
+                ],
+                "id": 59,
+                "name": "Mapping",
+                "src": "798:21:0"
+              }
+            ],
+            "id": 60,
+            "name": "VariableDeclaration",
+            "src": "798:27:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "name": "addCard",
+              "payable": false,
+              "scope": 183,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_index",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 61,
+                        "name": "ElementaryTypeName",
+                        "src": "849:4:0"
+                      }
+                    ],
+                    "id": 62,
+                    "name": "VariableDeclaration",
+                    "src": "849:11:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_name",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 63,
+                        "name": "ElementaryTypeName",
+                        "src": "862:6:0"
+                      }
+                    ],
+                    "id": 64,
+                    "name": "VariableDeclaration",
+                    "src": "862:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_text",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 65,
+                        "name": "ElementaryTypeName",
+                        "src": "876:6:0"
+                      }
+                    ],
+                    "id": 66,
+                    "name": "VariableDeclaration",
+                    "src": "876:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_rarity",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 67,
+                        "name": "ElementaryTypeName",
+                        "src": "890:4:0"
+                      }
+                    ],
+                    "id": 68,
+                    "name": "VariableDeclaration",
+                    "src": "890:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_attack",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 69,
+                        "name": "ElementaryTypeName",
+                        "src": "904:4:0"
+                      }
+                    ],
+                    "id": 70,
+                    "name": "VariableDeclaration",
+                    "src": "904:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_defence",
+                      "scope": 121,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 71,
+                        "name": "ElementaryTypeName",
+                        "src": "918:4:0"
+                      }
+                    ],
+                    "id": 72,
+                    "name": "VariableDeclaration",
+                    "src": "918:13:0"
+                  }
+                ],
+                "id": 73,
+                "name": "ParameterList",
+                "src": "848:84:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 76,
+                "name": "ParameterList",
+                "src": "966:0:0"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 343,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 74,
+                    "name": "Identifier",
+                    "src": "949:9:0"
+                  }
+                ],
+                "id": 75,
+                "name": "ModifierInvocation",
+                "src": "949:11:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "name",
+                              "referencedDeclaration": 43,
+                              "type": "string storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 77,
+                                    "name": "Identifier",
+                                    "src": "976:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 78,
+                                    "name": "Identifier",
+                                    "src": "982:6:0"
+                                  }
+                                ],
+                                "id": 79,
+                                "name": "IndexAccess",
+                                "src": "976:13:0"
+                              }
+                            ],
+                            "id": 80,
+                            "name": "MemberAccess",
+                            "src": "976:18:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 64,
+                              "type": "string memory",
+                              "value": "_name"
+                            },
+                            "id": 81,
+                            "name": "Identifier",
+                            "src": "997:5:0"
+                          }
+                        ],
+                        "id": 82,
+                        "name": "Assignment",
+                        "src": "976:26:0"
+                      }
+                    ],
+                    "id": 83,
+                    "name": "ExpressionStatement",
+                    "src": "976:26:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "text",
+                              "referencedDeclaration": 45,
+                              "type": "string storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 84,
+                                    "name": "Identifier",
+                                    "src": "1012:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 85,
+                                    "name": "Identifier",
+                                    "src": "1018:6:0"
+                                  }
+                                ],
+                                "id": 86,
+                                "name": "IndexAccess",
+                                "src": "1012:13:0"
+                              }
+                            ],
+                            "id": 87,
+                            "name": "MemberAccess",
+                            "src": "1012:18:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 66,
+                              "type": "string memory",
+                              "value": "_text"
+                            },
+                            "id": 88,
+                            "name": "Identifier",
+                            "src": "1033:5:0"
+                          }
+                        ],
+                        "id": 89,
+                        "name": "Assignment",
+                        "src": "1012:26:0"
+                      }
+                    ],
+                    "id": 90,
+                    "name": "ExpressionStatement",
+                    "src": "1012:26:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "attack",
+                              "referencedDeclaration": 47,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 91,
+                                    "name": "Identifier",
+                                    "src": "1048:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 92,
+                                    "name": "Identifier",
+                                    "src": "1054:6:0"
+                                  }
+                                ],
+                                "id": 93,
+                                "name": "IndexAccess",
+                                "src": "1048:13:0"
+                              }
+                            ],
+                            "id": 94,
+                            "name": "MemberAccess",
+                            "src": "1048:20:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 70,
+                              "type": "int8",
+                              "value": "_attack"
+                            },
+                            "id": 95,
+                            "name": "Identifier",
+                            "src": "1071:7:0"
+                          }
+                        ],
+                        "id": 96,
+                        "name": "Assignment",
+                        "src": "1048:30:0"
+                      }
+                    ],
+                    "id": 97,
+                    "name": "ExpressionStatement",
+                    "src": "1048:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "defence",
+                              "referencedDeclaration": 49,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 98,
+                                    "name": "Identifier",
+                                    "src": "1088:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 99,
+                                    "name": "Identifier",
+                                    "src": "1094:6:0"
+                                  }
+                                ],
+                                "id": 100,
+                                "name": "IndexAccess",
+                                "src": "1088:13:0"
+                              }
+                            ],
+                            "id": 101,
+                            "name": "MemberAccess",
+                            "src": "1088:21:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 72,
+                              "type": "int8",
+                              "value": "_defence"
+                            },
+                            "id": 102,
+                            "name": "Identifier",
+                            "src": "1112:8:0"
+                          }
+                        ],
+                        "id": 103,
+                        "name": "Assignment",
+                        "src": "1088:32:0"
+                      }
+                    ],
+                    "id": 104,
+                    "name": "ExpressionStatement",
+                    "src": "1088:32:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "rarity",
+                              "referencedDeclaration": 51,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 105,
+                                    "name": "Identifier",
+                                    "src": "1130:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 106,
+                                    "name": "Identifier",
+                                    "src": "1136:6:0"
+                                  }
+                                ],
+                                "id": 107,
+                                "name": "IndexAccess",
+                                "src": "1130:13:0"
+                              }
+                            ],
+                            "id": 108,
+                            "name": "MemberAccess",
+                            "src": "1130:20:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 68,
+                              "type": "int8",
+                              "value": "_rarity"
+                            },
+                            "id": 109,
+                            "name": "Identifier",
+                            "src": "1153:7:0"
+                          }
+                        ],
+                        "id": 110,
+                        "name": "Assignment",
+                        "src": "1130:30:0"
+                      }
+                    ],
+                    "id": 111,
+                    "name": "ExpressionStatement",
+                    "src": "1130:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "created",
+                              "referencedDeclaration": 55,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 112,
+                                    "name": "Identifier",
+                                    "src": "1170:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 62,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 113,
+                                    "name": "Identifier",
+                                    "src": "1176:6:0"
+                                  }
+                                ],
+                                "id": 114,
+                                "name": "IndexAccess",
+                                "src": "1170:13:0"
+                              }
+                            ],
+                            "id": 115,
+                            "name": "MemberAccess",
+                            "src": "1170:21:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "timestamp",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 373,
+                                  "type": "block",
+                                  "value": "block"
+                                },
+                                "id": 116,
+                                "name": "Identifier",
+                                "src": "1194:5:0"
+                              }
+                            ],
+                            "id": 117,
+                            "name": "MemberAccess",
+                            "src": "1194:15:0"
+                          }
+                        ],
+                        "id": 118,
+                        "name": "Assignment",
+                        "src": "1170:39:0"
+                      }
+                    ],
+                    "id": 119,
+                    "name": "ExpressionStatement",
+                    "src": "1170:39:0"
+                  }
+                ],
+                "id": 120,
+                "name": "Block",
+                "src": "966:250:0"
+              }
+            ],
+            "id": 121,
+            "name": "FunctionDefinition",
+            "src": "832:384:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "name": "editCard",
+              "payable": false,
+              "scope": 183,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_index",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 122,
+                        "name": "ElementaryTypeName",
+                        "src": "1240:4:0"
+                      }
+                    ],
+                    "id": 123,
+                    "name": "VariableDeclaration",
+                    "src": "1240:11:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_name",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 124,
+                        "name": "ElementaryTypeName",
+                        "src": "1253:6:0"
+                      }
+                    ],
+                    "id": 125,
+                    "name": "VariableDeclaration",
+                    "src": "1253:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_text",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 126,
+                        "name": "ElementaryTypeName",
+                        "src": "1267:6:0"
+                      }
+                    ],
+                    "id": 127,
+                    "name": "VariableDeclaration",
+                    "src": "1267:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_rarity",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 128,
+                        "name": "ElementaryTypeName",
+                        "src": "1281:4:0"
+                      }
+                    ],
+                    "id": 129,
+                    "name": "VariableDeclaration",
+                    "src": "1281:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_attack",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 130,
+                        "name": "ElementaryTypeName",
+                        "src": "1295:4:0"
+                      }
+                    ],
+                    "id": 131,
+                    "name": "VariableDeclaration",
+                    "src": "1295:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_defence",
+                      "scope": 182,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "int8",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "int8",
+                          "type": "int8"
+                        },
+                        "id": 132,
+                        "name": "ElementaryTypeName",
+                        "src": "1309:4:0"
+                      }
+                    ],
+                    "id": 133,
+                    "name": "VariableDeclaration",
+                    "src": "1309:13:0"
+                  }
+                ],
+                "id": 134,
+                "name": "ParameterList",
+                "src": "1239:84:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 137,
+                "name": "ParameterList",
+                "src": "1357:0:0"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 343,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 135,
+                    "name": "Identifier",
+                    "src": "1340:9:0"
+                  }
+                ],
+                "id": 136,
+                "name": "ModifierInvocation",
+                "src": "1340:11:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "name",
+                              "referencedDeclaration": 43,
+                              "type": "string storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 138,
+                                    "name": "Identifier",
+                                    "src": "1412:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 139,
+                                    "name": "Identifier",
+                                    "src": "1418:6:0"
+                                  }
+                                ],
+                                "id": 140,
+                                "name": "IndexAccess",
+                                "src": "1412:13:0"
+                              }
+                            ],
+                            "id": 141,
+                            "name": "MemberAccess",
+                            "src": "1412:18:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 125,
+                              "type": "string memory",
+                              "value": "_name"
+                            },
+                            "id": 142,
+                            "name": "Identifier",
+                            "src": "1433:5:0"
+                          }
+                        ],
+                        "id": 143,
+                        "name": "Assignment",
+                        "src": "1412:26:0"
+                      }
+                    ],
+                    "id": 144,
+                    "name": "ExpressionStatement",
+                    "src": "1412:26:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "text",
+                              "referencedDeclaration": 45,
+                              "type": "string storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 145,
+                                    "name": "Identifier",
+                                    "src": "1448:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 146,
+                                    "name": "Identifier",
+                                    "src": "1454:6:0"
+                                  }
+                                ],
+                                "id": 147,
+                                "name": "IndexAccess",
+                                "src": "1448:13:0"
+                              }
+                            ],
+                            "id": 148,
+                            "name": "MemberAccess",
+                            "src": "1448:18:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 127,
+                              "type": "string memory",
+                              "value": "_text"
+                            },
+                            "id": 149,
+                            "name": "Identifier",
+                            "src": "1469:5:0"
+                          }
+                        ],
+                        "id": 150,
+                        "name": "Assignment",
+                        "src": "1448:26:0"
+                      }
+                    ],
+                    "id": 151,
+                    "name": "ExpressionStatement",
+                    "src": "1448:26:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "attack",
+                              "referencedDeclaration": 47,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 152,
+                                    "name": "Identifier",
+                                    "src": "1484:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 153,
+                                    "name": "Identifier",
+                                    "src": "1490:6:0"
+                                  }
+                                ],
+                                "id": 154,
+                                "name": "IndexAccess",
+                                "src": "1484:13:0"
+                              }
+                            ],
+                            "id": 155,
+                            "name": "MemberAccess",
+                            "src": "1484:20:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 131,
+                              "type": "int8",
+                              "value": "_attack"
+                            },
+                            "id": 156,
+                            "name": "Identifier",
+                            "src": "1507:7:0"
+                          }
+                        ],
+                        "id": 157,
+                        "name": "Assignment",
+                        "src": "1484:30:0"
+                      }
+                    ],
+                    "id": 158,
+                    "name": "ExpressionStatement",
+                    "src": "1484:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "defence",
+                              "referencedDeclaration": 49,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 159,
+                                    "name": "Identifier",
+                                    "src": "1524:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 160,
+                                    "name": "Identifier",
+                                    "src": "1530:6:0"
+                                  }
+                                ],
+                                "id": 161,
+                                "name": "IndexAccess",
+                                "src": "1524:13:0"
+                              }
+                            ],
+                            "id": 162,
+                            "name": "MemberAccess",
+                            "src": "1524:21:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 133,
+                              "type": "int8",
+                              "value": "_defence"
+                            },
+                            "id": 163,
+                            "name": "Identifier",
+                            "src": "1548:8:0"
+                          }
+                        ],
+                        "id": 164,
+                        "name": "Assignment",
+                        "src": "1524:32:0"
+                      }
+                    ],
+                    "id": 165,
+                    "name": "ExpressionStatement",
+                    "src": "1524:32:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "int8"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "rarity",
+                              "referencedDeclaration": 51,
+                              "type": "int8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 166,
+                                    "name": "Identifier",
+                                    "src": "1566:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 167,
+                                    "name": "Identifier",
+                                    "src": "1572:6:0"
+                                  }
+                                ],
+                                "id": 168,
+                                "name": "IndexAccess",
+                                "src": "1566:13:0"
+                              }
+                            ],
+                            "id": 169,
+                            "name": "MemberAccess",
+                            "src": "1566:20:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 129,
+                              "type": "int8",
+                              "value": "_rarity"
+                            },
+                            "id": 170,
+                            "name": "Identifier",
+                            "src": "1589:7:0"
+                          }
+                        ],
+                        "id": 171,
+                        "name": "Assignment",
+                        "src": "1566:30:0"
+                      }
+                    ],
+                    "id": 172,
+                    "name": "ExpressionStatement",
+                    "src": "1566:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "lastModified",
+                              "referencedDeclaration": 53,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ExampleCardCollection.Card storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 60,
+                                      "type": "mapping(uint256 => struct ExampleCardCollection.Card storage ref)",
+                                      "value": "Cards"
+                                    },
+                                    "id": 173,
+                                    "name": "Identifier",
+                                    "src": "1606:5:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 123,
+                                      "type": "uint256",
+                                      "value": "_index"
+                                    },
+                                    "id": 174,
+                                    "name": "Identifier",
+                                    "src": "1612:6:0"
+                                  }
+                                ],
+                                "id": 175,
+                                "name": "IndexAccess",
+                                "src": "1606:13:0"
+                              }
+                            ],
+                            "id": 176,
+                            "name": "MemberAccess",
+                            "src": "1606:26:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "timestamp",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 373,
+                                  "type": "block",
+                                  "value": "block"
+                                },
+                                "id": 177,
+                                "name": "Identifier",
+                                "src": "1635:5:0"
+                              }
+                            ],
+                            "id": 178,
+                            "name": "MemberAccess",
+                            "src": "1635:15:0"
+                          }
+                        ],
+                        "id": 179,
+                        "name": "Assignment",
+                        "src": "1606:44:0"
+                      }
+                    ],
+                    "id": 180,
+                    "name": "ExpressionStatement",
+                    "src": "1606:44:0"
+                  }
+                ],
+                "id": 181,
+                "name": "Block",
+                "src": "1357:300:0"
+              }
+            ],
+            "id": 182,
+            "name": "FunctionDefinition",
+            "src": "1222:435:0"
+          }
+        ],
+        "id": 183,
+        "name": "ContractDefinition",
+        "src": "454:1205:0"
+      }
+    ],
+    "id": 184,
+    "name": "SourceUnit",
+    "src": "0:1659:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-01-21T15:47:16.661Z"
+}
