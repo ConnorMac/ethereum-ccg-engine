@@ -152,7 +152,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 370,
+          "SourceUnit": 518,
           "absolutePath": "/Users/connormacdougall/Projects/ethereum-ccg-engine/contracts/Ownable.sol",
           "file": "./Ownable.sol",
           "scope": 184,
@@ -168,14 +168,14 @@
       {
         "attributes": {
           "contractDependencies": [
-            369
+            517
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
             39,
-            369
+            517
           ],
           "name": "CardCollection",
           "scope": 184
@@ -192,7 +192,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Ownable",
-                  "referencedDeclaration": 369,
+                  "referencedDeclaration": 517,
                   "type": "contract Ownable"
                 },
                 "id": 3,
@@ -527,7 +527,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 343,
+                      "referencedDeclaration": 491,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -616,7 +616,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 343,
+                      "referencedDeclaration": 491,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -643,7 +643,7 @@
         "attributes": {
           "contractDependencies": [
             39,
-            369
+            517
           ],
           "contractKind": "contract",
           "documentation": null,
@@ -651,7 +651,7 @@
           "linearizedBaseContracts": [
             183,
             39,
-            369
+            517
           ],
           "name": "ExampleCardCollection",
           "scope": 184
@@ -1122,7 +1122,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 343,
+                      "referencedDeclaration": 491,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -1713,7 +1713,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 373,
+                                  "referencedDeclaration": 521,
                                   "type": "block",
                                   "value": "block"
                                 },
@@ -1946,7 +1946,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 343,
+                      "referencedDeclaration": 491,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
@@ -2537,7 +2537,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 373,
+                                  "referencedDeclaration": 521,
                                   "type": "block",
                                   "value": "block"
                                 },
@@ -2586,5 +2586,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-21T15:47:16.660Z"
+  "updatedAt": "2018-01-22T18:55:51.068Z"
 }
